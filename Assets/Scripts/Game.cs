@@ -52,8 +52,6 @@ public class Game : MonoBehaviour
         PostArray.Add(pos5);
         PostArray.Add(pos6);
         PostArray.Add(pos7);
-
-       
     }
     //starts normal game
     public void OnClickNormal()
