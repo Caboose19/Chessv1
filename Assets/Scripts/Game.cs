@@ -76,7 +76,7 @@ public class Game : MonoBehaviour
         pos2 = Random.Range(0, 8);
         if (pos2 % 2 == 0)
         {
-            pos5 = Random.Range(1, 7);
+            pos5 = Random.Range(0, 8);
         }
 
         //Queen
@@ -100,7 +100,6 @@ public class Game : MonoBehaviour
             if (pos - 1 == pos7 || pos == pos7 - 1)
             {
                 pos = Random.Range(0, 8);
-                pos7 = Random.Range(0, 8);
             }
         }
         while (pos == pos7 || pos1 == pos7 || pos2 == pos7 || pos3 == pos7 || pos4 == pos7 || pos5 == pos7 || pos6 == pos7)
@@ -109,54 +108,85 @@ public class Game : MonoBehaviour
             if (pos - 1 == pos7 || pos == pos7 - 1)
             {
                 pos7 = Random.Range(0, 8);
-                pos = Random.Range(0, 8);
             }
         }
         //king 
-        while (pos == pos4 || pos1 == pos4 || pos2 == pos4 || pos3 == pos4 || pos5 == pos4 || pos6 == pos4 || pos7 == pos4)
+        if (pos > pos7)
         {
-            if (pos > pos7)
+            while (pos4 >= pos && pos4 >= pos7)
+            {          
+                pos4 = Random.Range(pos7, pos - 1);
+                
+            }   
+        }
+        else if (pos7 > pos)
+        {
+            while (pos4 >= pos && pos4 >= pos7)
             {
-                while (pos4 > pos && pos4 < pos7)
-                {
-                    pos4 = Random.Range(pos7, pos - 1);
-                    break;
-                }
-            }
-            else if (pos7 > pos)
-            {
-                while (pos4 < pos && pos4 > pos7)
-                {
-                    pos4 = Random.Range(pos, pos7 - 1);
-                    break;
-                }
-
-            }
-
+                pos4 = Random.Range(pos, pos7 - 1);
+                   
+            }    
         }
 
+        
+        //Bishop
         while (pos == pos2 || pos1 == pos2 || pos3 == pos2 || pos4 == pos2 || pos5 == pos2 || pos6 == pos2 || pos7 == pos2)
         {
             pos2 = Random.Range(0, 7);
 
-            while (pos2 % 2 == 0)
+            if (pos2 % 2 == 0)
             {
-                pos5 = Random.Range(1, 7);
+                if(pos5 %2 == 0)
+                {
+                    pos5 = Random.Range(0, 8);
+                }
             }
-            while (pos2 % 2 != 0)
+            if (pos2 % 2 != 0)
             {
-                pos5 = Random.Range(0, 8);
+                if (pos5 % 2 != 0)
+                {
+                    pos5 = Random.Range(0, 8);
+                }
+            }
+        }
+        while (pos == pos5 || pos1 == pos5 || pos2 == pos5 || pos3 == pos5 || pos4 == pos5 || pos6 == pos5 || pos7 == pos5)
+        {
+            pos5 = Random.Range(0, 7);
+
+            if (pos5 % 2 == 0)
+            {
+                if (pos2 % 2 == 0)
+                {
+                    pos2 = Random.Range(0, 8);
+                }
+            }
+            if (pos5 % 2 != 0)
+            {
+                if (pos2 % 2 != 0)
+                {
+                    pos2 = Random.Range(0, 8);
+                }
             }
         }
 
+        //Non important placement 
         while (pos == pos3 || pos1 == pos3 || pos2 == pos3 || pos4 == pos3 || pos5 == pos3 || pos6 == pos3 || pos7 == pos3)
         {
-            pos3 = Random.Range(0, 7);
+            pos3 = Random.Range(0, 8);
         }
         while (pos == pos6 || pos1 == pos6 || pos2 == pos6 || pos3 == pos6 || pos4 == pos6 || pos5 == pos6 || pos7 == pos6)
         {
-            pos6 = Random.Range(0, 7);
+            pos6 = Random.Range(0, 8);
         }
+        while (pos == pos1 || pos2 == pos1 || pos3 == pos1 || pos4 == pos1 || pos5 == pos1 || pos6 == pos1 || pos7 == pos1)
+        {
+            pos1 = Random.Range(0, 8);
+        }
+
+        
+
+
+
 
         string test = pos + " " + pos1 + " " + pos2 + " " + pos3 + " " + pos4 + " " + pos5 + " " + pos6 + " " + pos7;
 
@@ -169,18 +199,18 @@ public class Game : MonoBehaviour
 
         //Place pos on the board using random x coord
 
-        playerWhite = new GameObject[] { Create("white_rook", pos, 0), /*Create("white_knight", pos1, 0),*/
-            Create("white_bishop", pos2, 0),/* Create("white_queen", pos3, 0),*/ Create("white_king", pos4, 0),
+        playerWhite = new GameObject[] { Create("white_rook", pos, 0), Create("white_knight", pos1, 0),
+            Create("white_bishop", pos2, 0), Create("white_queen", pos3, 0), Create("white_king", pos4, 0),
             Create("white_bishop", pos5, 0), Create("white_knight", pos6, 0), Create("white_rook", pos7, 0),
-           /* Create("white_pawn", 0, 1), Create("white_pawn", 1, 1), Create("white_pawn", 2, 1),
+            Create("white_pawn", 0, 1), Create("white_pawn", 1, 1), Create("white_pawn", 2, 1),
             Create("white_pawn", 3, 1), Create("white_pawn", 4, 1), Create("white_pawn", 5, 1),
-            Create("white_pawn", 6, 1), Create("white_pawn", 7, 1)*/ };
-        playerBlack = new GameObject[] { Create("black_rook", pos, 7), /*Create("black_knight",pos1,7),*/
-            Create("black_bishop",pos2,7), /*Create("black_queen",pos3,7),*/ Create("black_king",pos4,7),
-            Create("black_bishop",pos5,7), /*Create("black_knight",pos6,7),*/ Create("black_rook",pos7,7)
-            /*Create("black_pawn", 0, 6), Create("black_pawn", 1, 6), Create("black_pawn", 2, 6),
+            Create("white_pawn", 6, 1), Create("white_pawn", 7, 1) };
+        playerBlack = new GameObject[] { Create("black_rook", pos, 7), Create("black_knight",pos1,7),
+            Create("black_bishop",pos2,7), Create("black_queen",pos3,7), Create("black_king",pos4,7),
+            Create("black_bishop",pos5,7), Create("black_knight",pos6,7), Create("black_rook",pos7,7),
+            Create("black_pawn", 0, 6), Create("black_pawn", 1, 6), Create("black_pawn", 2, 6),
             Create("black_pawn", 3, 6), Create("black_pawn", 4, 6), Create("black_pawn", 5, 6),
-            Create("black_pawn", 6, 6), Create("black_pawn", 7, 6)*/ };
+            Create("black_pawn", 6, 6), Create("black_pawn", 7, 6) };
 
         //Set all piece positions on the positions board
         for (int i = 0; i < playerWhite.Length; i++)
