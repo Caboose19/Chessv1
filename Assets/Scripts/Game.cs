@@ -9,6 +9,10 @@ public class Game : MonoBehaviour
     //Reference from Unity IDE
     public GameObject chesspiece;
 
+    public GameObject board;
+    public GameObject btn1;
+    public GameObject btn2;
+
     //Matrices needed, positions of each of the GameObjects
     //Also separate arrays for the players in order to easily keep track of them all
     //Keep in mind that the same objects are going to be in "positions" and "playerBlack"/"playerWhite"
@@ -27,14 +31,32 @@ public class Game : MonoBehaviour
     //that Unity can call for you
     public void Start()
     {
-        //NormalGame();
+        board.SetActive(false);
+        btn1.SetActive(true);
+        btn2.SetActive(true);
+
+    }
+    //starts normal game
+    public void OnClickNormal()
+    {
+        board.SetActive(true);
+        btn1.SetActive(false);
+        btn2.SetActive(false);
+        NormalGame();
+    }
+
+    //Starts Chess 960
+
+    public void OnClick960()
+    {
+        board.SetActive(true);
+        btn1.SetActive(false);
+        btn2.SetActive(false);
         SpecialGame();
     }
 
     public void SpecialGame()
     {
-
-
         int pos = Random.Range(0, 8);
         int pos1 = Random.Range(0, 8);
         int pos2 = Random.Range(0, 8);
@@ -43,11 +65,12 @@ public class Game : MonoBehaviour
         int pos5 = Random.Range(0, 8);
         int pos6 = Random.Range(0, 8);
         int pos7 = Random.Range(0, 8);
-
-        while (pos == pos1 || pos == pos2 || pos == pos3 || pos == pos4 || pos == pos5 || pos == pos6 || pos == pos7)
-        {
-            pos = Random.Range(0, 7);
-        }
+        //Checks that pos doesn't overlap ever but still reamins as random so we have no overlap not the prettiest solution but workable
+        /*
+                while (pos == pos1 || pos == pos2 || pos == pos3 || pos == pos4 || pos == pos5 || pos == pos6 || pos == pos7)
+                {
+                    pos = Random.Range(0, 7);
+                }*/
         while (pos == pos1 || pos2 == pos1 || pos3 == pos1 || pos4 == pos1 || pos5 == pos1 || pos6 == pos1 || pos7 == pos1)
         {
             pos1 = Random.Range(0, 7);
@@ -77,6 +100,7 @@ public class Game : MonoBehaviour
             pos7 = Random.Range(0, 7);
         }
 
+        //Place pos on the board using random x coord
 
         playerWhite = new GameObject[] { Create("white_rook", pos, 0), Create("white_knight", pos1, 0),
             Create("white_bishop", pos2, 0), Create("white_queen", pos3, 0), Create("white_king", pos4, 0),
