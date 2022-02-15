@@ -223,7 +223,7 @@ public class Game : MonoBehaviour
         pos = randNum();
         pos7 = randNum();
 
-        while (pos == pos7-1 && pos7 == pos-1 || pos == pos7)
+        while (pos == pos7-1 ||  pos7 == pos-1 || pos == pos7)
         {
             pos = randNum();
             pos7 = randNum();
