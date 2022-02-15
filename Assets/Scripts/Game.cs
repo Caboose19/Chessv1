@@ -81,7 +81,7 @@ public class Game : MonoBehaviour
 
         var temp = PostArray[index].ToString();
 
-        Debug.Log(temp);
+       // Debug.Log(temp);
         return int.Parse(temp);
     }
     public void SpecialGame()
@@ -206,19 +206,6 @@ public class Game : MonoBehaviour
             pos1 = Random.Range(0, 8);
         }*/
         #endregion  Inital Random work 
-
-        //Bishop pos2,pos5
-        pos2 = randNum();
-        pos5 = randNum();
-
-        while(pos2 % 2 == 0 && pos5 % 2 == 0 || pos2 % 2 != 0 && pos5 % 2 != 0)
-        {
-            pos2 = randNum();
-            pos5 = randNum();
-        }
-        //remove at idex
-        PostArray.Remove(pos2);
-        PostArray.Remove(pos5);
         //Rooks pos, pos7
         pos = randNum();
         pos7 = randNum();
@@ -250,6 +237,19 @@ public class Game : MonoBehaviour
         }
         PostArray.Remove(pos4);
 
+
+        //Bishop pos2,pos5
+        pos2 = randNum();
+        pos5 = randNum();
+
+        while(pos2 % 2 == 0 && pos5 % 2 == 0 || pos2 % 2 != 0 && pos5 % 2 != 0)
+        {
+            pos2 = randNum();
+            pos5 = randNum();
+        }
+        //remove at idex
+        PostArray.Remove(pos2);
+        PostArray.Remove(pos5);
         //Others pos1, pos3, pos6, 
         pos1 = randNum();
         PostArray.Remove(pos1);
@@ -258,7 +258,6 @@ public class Game : MonoBehaviour
         pos6 = randNum();
         PostArray.Remove(pos6);
         string test = pos + " " + pos1 + " " + pos2 + " " + pos3 + " " + pos4 + " " + pos5 + " " + pos6 + " " + pos7;
-
 
         /* return test;*/
 
@@ -286,12 +285,12 @@ public class Game : MonoBehaviour
             SetPosition(playerWhite[i]);
         }
         #endregion
-        /*for (int i = 0; i < playerBlack.Length-8; i++)
+        for (int i = 0; i < playerBlack.Length - 8; i++)
         {
             string placeTest = playerBlack[i].name + " " + playerBlack[i].transform.position.x + " " + playerWhite[i].name + " " + playerWhite[i].transform.position.x;
 
             Debug.Log(placeTest);
-        }*/
+        }
     }
 
     public void NormalGame()
